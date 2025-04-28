@@ -87,14 +87,13 @@
     Number of enrolled students
   </dt>
   <dd>
-    <%= Enrollment.where({ :course_id => @course.id }) %>
+    <%= Enrollment.where({ :course_id => @course.id }).count %>
   </dd>
 </dl>
 
 <hr>
-
-<h2>Roster</h2>
-<ul>
+ <h2>Roster</h2>
+<ol>
   <% Enrollment.where({ :course_id => @course.id }).each do |enrollment| %>
     <% student = Student.where({ :id => enrollment.student_id }).at(0) %>
     <li>
@@ -103,4 +102,4 @@
       </a>
     </li>
   <% end %>
-</ul>
+</ol>
