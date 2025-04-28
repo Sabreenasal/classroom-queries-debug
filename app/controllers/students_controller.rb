@@ -8,8 +8,12 @@ class StudentsController < ApplicationController
   def show
     the_id = params.fetch("path_id")
     @student = Student.where({:id => the_id }).at(0)
-
-    render({ :template => "students/show" })
+    
+    if @student.nil?
+      redirect_to "/students", alert: "Student not found"
+    else
+      render({ :template => "students/show" })
+    end
   end
 
   def create
